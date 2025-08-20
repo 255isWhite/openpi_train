@@ -87,7 +87,7 @@ def main():
             
             
     level1_dirs = sorted([p for p in DATASET_DIR.iterdir() if p.is_dir()])
-    count = 0
+    index = 0
     for d1 in level1_dirs:
         # 第二层目录
         level2_dirs = sorted([p for p in d1.iterdir() if p.is_dir()])
@@ -97,32 +97,32 @@ def main():
             h5_files = h5_files[:GLOBAL_N]  # 只取前 n 个
 
             for h5_path in tqdm(h5_files, desc=f"{d1.name}/{d2.name}", leave=False):
-                count += 1
-                print(f"Processing file {count}: {h5_path.name}")
+                index += 1
+                print(f"Processing file {index}{d1.name}/{d2.name}/: {h5_path.name}")
                 with h5py.File(h5_path, "r") as f:
                     print(f"Processing file: {h5_path.name}")
-                    actions = f['action'][()]
-                    proprios = f['proprio'][()]
-                    third_imgs = f['observation']['third_image'][()]
-                    wrist_imgs = f['observation']['wrist_image'][()]
-                    # TODO: 在这里处理数据
+                    # actions = f['action'][()]
+                    # proprios = f['proprio'][()]
+                    # third_imgs = f['observation']['third_image'][()]
+                    # wrist_imgs = f['observation']['wrist_image'][()]
+                    # # TODO: 在这里处理数据
                     
-                    proprios = convert_proprios(proprios)  # 转换四元数到 axis-angle
-                    assert actions.shape[0] == third_imgs.shape[0] == wrist_imgs.shape[0] == proprios.shape[0]
+                    # proprios = convert_proprios(proprios)  # 转换四元数到 axis-angle
+                    # assert actions.shape[0] == third_imgs.shape[0] == wrist_imgs.shape[0] == proprios.shape[0]
+                    # # print(f"episode length is {actions.shape[0]}")
                     # print(f"episode length is {actions.shape[0]}")
-                    print(f"episode length is {actions.shape[0]}")
-                    for i in range(actions.shape[0]):
-                        # print(f" shape of third_imgs[i]third_imgs[i] is {third_imgs[i]}")
-                        dataset.add_frame(
-                            {
-                                "image": cv2.imdecode(third_imgs[i],  cv2.IMREAD_COLOR),
-                                "wrist_image": cv2.imdecode(wrist_imgs[i],  cv2.IMREAD_COLOR),
-                                "state": proprios[i],
-                                "actions": actions[i],
-                                "task": f['language_instruction'][()].decode('utf-8'),
-                            }
-                        )
-                    dataset.save_episode()
+                    # for i in range(actions.shape[0]):
+                    #     # print(f" shape of third_imgs[i]third_imgs[i] is {third_imgs[i]}")
+                    #     dataset.add_frame(
+                    #         {
+                    #             "image": cv2.imdecode(third_imgs[i],  cv2.IMREAD_COLOR),
+                    #             "wrist_image": cv2.imdecode(wrist_imgs[i],  cv2.IMREAD_COLOR),
+                    #             "state": proprios[i],
+                    #             "actions": actions[i],
+                    #             "task": f['language_instruction'][()].decode('utf-8'),
+                    #         }
+                    #     )
+                    # dataset.save_episode()
                 
         
 
@@ -148,9 +148,9 @@ def _quat2axisangle(quat):
 
 
 def convert_proprios(proprios):
-    grippers = proprios[:, :2]
-    xyz = proprios[:, 2:5]
-    quats = proprios[:, 5:9]
+    xyz = proprios[:, :3]
+    quats = proprios[:, 3:7]
+    grippers = proprios[:, 7:]
 
     # 批量转换四元数 -> axis-angle
     axis_angles = np.array([_quat2axisangle(q) for q in quats])  # (n, 3)

@@ -17,7 +17,7 @@ You can download the raw Libero datasets from https://huggingface.co/datasets/op
 The resulting dataset will get saved to the $LEROBOT_HOME directory.
 Running this conversion script will take approximately 30 minutes.
 """
-
+import random
 import shutil
 from pathlib import Path
 import os
@@ -29,11 +29,11 @@ from tqdm import tqdm
 import h5py
 import cv2
 
-REPO_NAME = "LIBERO130_10shot"  # Name of the output dataset, also used for the Hugging Face Hub
-DATASET_DIR = "/mnt/ssd0/data/libero"
+REPO_NAME = "ROBOMIMIC_10shot"  # Name of the output dataset, also used for the Hugging Face Hub
+DATASET_DIR = "/mnt/ssd0/data/robomimic/processed_hdf5"
 DATASET_DIR = Path(DATASET_DIR)        # 转成 Path 对象
 GLOBAL_N = 10
-
+random.seed(42)  # Set a random seed for reproducibility
 
 def main():
     # Clean up any existing dataset in the output directory
@@ -41,7 +41,7 @@ def main():
     # if output_path.exists():
     #     shutil.rmtree(output_path)
 
-    path = "/mnt/ssd1/data/zh1/lerobot/LIBERO130_10shot"
+    path = "/mnt/ssd1/data/zh1/lerobot/ROBOMIMIC_10shot"
 
     if os.path.exists(path):
         shutil.rmtree(path)  # 递归删除目录及所有内容
@@ -86,44 +86,50 @@ def main():
     # You can modify this for your own data format
             
             
-    level1_dirs = sorted([p for p in DATASET_DIR.iterdir() if p.is_dir()])
+    level1_dirs = sorted([p for p in DATASET_DIR.iterdir() if p.is_dir() and p.name in ['lift', 'can', 'square']])
     count = 0
-    for d1 in level1_dirs:
+    for d2 in level1_dirs:
         # 第二层目录
-        level2_dirs = sorted([p for p in d1.iterdir() if p.is_dir()])
-        for d2 in level2_dirs:
-            # 该叶子目录下的 h5 文件（按字典序）
-            h5_files = sorted(list(d2.glob("*.h5")) + list(d2.glob("*.hdf5")))
-            h5_files = h5_files[:GLOBAL_N]  # 只取前 n 个
+        # level2_dirs = sorted([p for p in d1.iterdir() if p.is_dir()])
+        # print(f"Processing directory: {d1.name}, found {len(level2_dirs)} subdirectories.")
+        # print(f"level2_dirs: {[d.name for d in level2_dirs]}")
+        print(f"Processing directory: {d2.name}")
 
-            for h5_path in tqdm(h5_files, desc=f"{d1.name}/{d2.name}", leave=False):
-                count += 1
-                print(f"Processing file {count}: {h5_path.name}")
-                with h5py.File(h5_path, "r") as f:
-                    print(f"Processing file: {h5_path.name}")
-                    actions = f['action'][()]
-                    proprios = f['proprio'][()]
-                    third_imgs = f['observation']['third_image'][()]
-                    wrist_imgs = f['observation']['wrist_image'][()]
-                    # TODO: 在这里处理数据
-                    
-                    proprios = convert_proprios(proprios)  # 转换四元数到 axis-angle
-                    assert actions.shape[0] == third_imgs.shape[0] == wrist_imgs.shape[0] == proprios.shape[0]
-                    # print(f"episode length is {actions.shape[0]}")
-                    print(f"episode length is {actions.shape[0]}")
-                    for i in range(actions.shape[0]):
-                        # print(f" shape of third_imgs[i]third_imgs[i] is {third_imgs[i]}")
-                        dataset.add_frame(
-                            {
-                                "image": cv2.imdecode(third_imgs[i],  cv2.IMREAD_COLOR),
-                                "wrist_image": cv2.imdecode(wrist_imgs[i],  cv2.IMREAD_COLOR),
-                                "state": proprios[i],
-                                "actions": actions[i],
-                                "task": f['language_instruction'][()].decode('utf-8'),
-                            }
-                        )
-                    dataset.save_episode()
+        is_twin = False
+        # 该叶子目录下的 h5 文件（按字典序）
+        h5_files = sorted(list(d2.glob("*.h5")) + list(d2.glob("*.hdf5")))
+        # h5_files = h5_files[:GLOBAL_N]  # 只取前 n 个
+        h5_files = random.sample(h5_files, GLOBAL_N)
+        
+        for h5_path in tqdm(h5_files, desc=f"{d2.name}", leave=False):
+            count += 1
+            print(f"Processing file {count}: {d2.name}/{h5_path.name}")
+            with h5py.File(h5_path, "r") as f:
+                print(f"Processing file: {h5_path.name}")
+                actions = f['action'][()]
+                proprios = f['proprio'][()]
+                third_imgs = f['observation']['third_image'][()]
+                wrist_imgs = f['observation']['wrist_image'][()]
+                # TODO: 在这里处理数据
                 
+                proprios = convert_proprios(proprios)  # 转换四元数到 axis-angle
+                
+                assert actions.shape[0] == third_imgs.shape[0] == wrist_imgs.shape[0] == proprios.shape[0]
+                # print(f"episode length is {actions.shape[0]}")
+                print(f"episode length is {actions.shape[0]}")
+                for i in range(actions.shape[0]):
+                    # print(f" shape of third_imgs[i]third_imgs[i] is {third_imgs[i]}")
+                    dataset.add_frame(
+                        {
+                            "image": cv2.imdecode(third_imgs[i],  cv2.IMREAD_COLOR),
+                            "wrist_image": cv2.imdecode(wrist_imgs[i],  cv2.IMREAD_COLOR),
+                            "state": proprios[i].astype(np.float32),   # ✅ 转成 float32
+                            "actions": actions[i].astype(np.float32),  # 建议 actions 也转一下
+                            "task": f['language_instruction'][()].decode('utf-8'),
+                        }
+                    )
+                dataset.save_episode()
+            
         
 
 
@@ -148,16 +154,18 @@ def _quat2axisangle(quat):
 
 
 def convert_proprios(proprios):
-    grippers = proprios[:, :2]
-    xyz = proprios[:, 2:5]
-    quats = proprios[:, 5:9]
+    xyz = proprios[:, :3]
+    quat = proprios[:, 3:7]
+    grippers = proprios[:, 7:9]
+    axis_angles = np.array([_quat2axisangle(q) for q in quat])  # (n, 3)\
+        
+    # 拼接成统一格式
+    new_proprios = np.hstack([
+        xyz, axis_angles, grippers
+    ])
 
-    # 批量转换四元数 -> axis-angle
-    axis_angles = np.array([_quat2axisangle(q) for q in quats])  # (n, 3)
-
-    # 拼接新的 (n, 8)
-    new_proprios = np.hstack([xyz, axis_angles, grippers])
     return new_proprios
+
 
 if __name__ == "__main__":
     main()
