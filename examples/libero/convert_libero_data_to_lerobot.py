@@ -29,7 +29,7 @@ from tqdm import tqdm
 import h5py
 import cv2
 
-REPO_NAME = "LIBERO130_10shot"  # Name of the output dataset, also used for the Hugging Face Hub
+REPO_NAME = "LIBERO40_10-30shot"  # Name of the output dataset, also used for the Hugging Face Hub
 DATASET_DIR = "/mnt/ssd0/data/libero"
 DATASET_DIR = Path(DATASET_DIR)        # 转成 Path 对象
 GLOBAL_N = 10
@@ -41,7 +41,7 @@ def main():
     # if output_path.exists():
     #     shutil.rmtree(output_path)
 
-    path = "/mnt/ssd1/data/zh1/lerobot/LIBERO130_10shot"
+    path = "/mnt/ssd1/data/zh1/lerobot/LIBERO40_10-30shot"
 
     if os.path.exists(path):
         shutil.rmtree(path)  # 递归删除目录及所有内容
@@ -89,6 +89,12 @@ def main():
     level1_dirs = sorted([p for p in DATASET_DIR.iterdir() if p.is_dir()])
     count = 0
     for d1 in level1_dirs:
+        if d1.name.endswith("90"):
+            continue
+        if d1.name.endswith("10"):
+            GLOBAL_N = 30
+        else:
+            GLOBAL_N = 10
         # 第二层目录
         level2_dirs = sorted([p for p in d1.iterdir() if p.is_dir()])
         for d2 in level2_dirs:
