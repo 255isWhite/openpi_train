@@ -549,6 +549,36 @@ _CONFIGS = [
     # the comments below.
     # pi0_base by full
     TrainConfig(
+        name="pi0_robotwin_clean_noopt_delta",
+        model=pi0.Pi0Config(),
+        data=LeRobotAlohaDataConfig(
+            repo_id="ROBOTWIN_CLEAN_NOOPT_DELTA",  # your datasets repo_id
+            adapt_to_pi=False,
+            use_delta_joint_actions=False,
+            repack_transforms=_transforms.Group(inputs=[
+                _transforms.RepackTransform({
+                    "images": {
+                        "cam_high": "observation.images.cam_high",
+                        "cam_left_wrist": "observation.images.cam_left_wrist",
+                        "cam_right_wrist": "observation.images.cam_right_wrist",
+                    },
+                    "state": "observation.state",
+                    "actions": "action",
+                    "prompt": "prompt",
+                })
+            ]),
+            base_config=DataConfig(
+                prompt_from_task=True, 
+                use_quantile_norm=True,# Set to True for prompt by task_name
+            ),
+        ),
+        num_train_steps=60000,
+        save_interval=10000,
+        keep_period=10000,
+        batch_size=32,
+        weight_loader=weight_loaders.CheckpointWeightLoader("gs://openpi-assets/checkpoints/pi0_base/params"),
+    ),
+    TrainConfig(
         name="pi0_robotwin_clean_noopt",
         model=pi0.Pi0Config(),
         data=LeRobotAlohaDataConfig(
@@ -725,7 +755,7 @@ _CONFIGS = [
     ),
     TrainConfig(
         # Change the name to reflect your model and dataset.
-        name="pi0_libero40_5-20shot",
+        name="pi0_libero40_5-30shot",
         # Here you define the model config -- In this example we use pi0 as the model
         # architecture and perform *full* finetuning. in the examples below we show how to modify
         # this to perform *low-memory* (LORA) finetuning and use pi0-FAST as an alternative architecture.
@@ -734,7 +764,7 @@ _CONFIGS = [
         # dataset. For your own dataset, you can change the repo_id to point to your dataset.
         # Also modify the DataConfig to use the new config you made for your dataset above.
         data=LeRobotLiberoDataConfig(
-            repo_id="LIBERO40_5-20shot",
+            repo_id="LIBERO40_5-30shot",
             base_config=DataConfig(
                 # This flag determines whether we load the prompt (i.e. the task instruction) from the
                 # ``task`` field in the LeRobot dataset. If set to True, the prompt will show up in

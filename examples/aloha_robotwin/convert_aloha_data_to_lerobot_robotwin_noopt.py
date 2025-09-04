@@ -28,7 +28,7 @@ import os
 from pathlib import Path
 from collections import defaultdict
 
-SAVE_JSON = "/home/wzh/openpi/examples/aloha_robotwin/noopt.json"
+SAVE_JSON = "/home/wzh/openpi/examples/aloha_robotwin/noopt_2.json"
 
 # 确保 JSON 文件可用
 if not os.path.exists(SAVE_JSON) or os.path.getsize(SAVE_JSON) == 0:
@@ -245,15 +245,28 @@ def populate_dataset(
             instruction = np.random.choice(instructions)  # 用 instruction 作为分类依据
         GLOBAL_TRANS[instruction] = task_name  # 记录 instruction -> task_name 的映射
         kept_count = 0
+        noopt_frames = []
         for i in range(num_frames):
             if i > 0:
                 diff = np.linalg.norm(action[i] - action[i-1])
                 if diff < threshold:
                     continue  # 跳过静止帧
+            noopt_frames.append(i)
 
+        for i in range(len(noopt_frames)):
+            if i == len(noopt_frames) - 1:
+                continue  # 最后一帧不处理
+            next_action = action[noopt_frames[i + 1]]
+            current_action = action[noopt_frames[i]]
+            # next minus current
+            delta_action = next_action - current_action
+            # for gripper
+            delta_action[6] = next_action[6]
+            delta_action[13] = next_action[13]
+            
             frame = {
                 "observation.state": state[i],
-                "action": action[i],
+                "action": delta_action,
                 "task": instruction,
             }
             for camera, img_array in imgs_per_cam.items():
