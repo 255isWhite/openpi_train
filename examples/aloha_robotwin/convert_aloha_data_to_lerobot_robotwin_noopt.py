@@ -28,7 +28,19 @@ import os
 from pathlib import Path
 from collections import defaultdict
 
-SAVE_JSON = "/home/wzh/openpi/examples/aloha_robotwin/noopt_2.json"
+SAVE_JSON = "/home/wzh/openpi/examples/aloha_robotwin/noopt_3.json"
+NEED_TASKS = [
+    "stack_bowls_three",
+    "stack_blocks_two",
+    "open_microwave",
+    "place_cans_plasticbox",
+    "place_dual_shoes",
+    "handover_mic",
+    "lift_pot",
+    "move_playingcard_away",
+    "turn_switch",
+    "rotate_qrcode"
+]
 
 # 确保 JSON 文件可用
 if not os.path.exists(SAVE_JSON) or os.path.getsize(SAVE_JSON) == 0:
@@ -238,6 +250,11 @@ def populate_dataset(
         dir_path = os.path.dirname(ep_path)
         task_name = dir_path.split('/')[-2].split('-')[0] 
         print(f"dir_path: {dir_path}")
+        
+        if task_name not in NEED_TASKS:
+            print(f"Skipping episode {ep_idx} with task {task_name}")
+            continue
+        
         json_Path = f"{dir_path}/instructions.json"
         with open(json_Path, 'r') as f_instr:
             instruction_dict = json.load(f_instr)
