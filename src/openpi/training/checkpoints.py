@@ -41,7 +41,7 @@ def initialize_checkpoint_dir(
         checkpoint_dir,
         item_handlers={
             "assets": CallbackHandler(),
-            # "train_state": ocp.PyTreeCheckpointHandler(),
+            "train_state": ocp.PyTreeCheckpointHandler(),
             "params": ocp.PyTreeCheckpointHandler(),
         },
         options=ocp.CheckpointManagerOptions(
@@ -49,7 +49,7 @@ def initialize_checkpoint_dir(
             keep_period=keep_period,
             create=False,
             async_options=ocp.AsyncOptions(timeout_secs=7200),
-            enable_async_checkpointing=False
+            # enable_async_checkpointing=False
         ),
     )
 
@@ -81,10 +81,10 @@ def save_state(
         train_state, params = _split_params(state)
     items = {
         "assets": save_assets,
-        # "train_state": train_state,
+        "train_state": train_state,
         "params": {"params": params},
     }
-    checkpoint_manager.save(step, items, force=True)
+    checkpoint_manager.save(step, items)
 
 
 def restore_state(

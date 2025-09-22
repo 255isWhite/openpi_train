@@ -81,7 +81,7 @@ def create_empty_dataset(
         },
         "action": {
             "dtype": "float32",
-            "shape": (len(motors),),
+            "shape": (20,),
             "names": [
                 motors,
             ],
@@ -177,7 +177,7 @@ def load_raw_episode_data(
 ) -> tuple[dict[str, np.ndarray], torch.Tensor, torch.Tensor, torch.Tensor | None, torch.Tensor | None]:
     with h5py.File(ep_path, "r") as ep:
         state = torch.from_numpy(ep["/observations/qpos"][:])
-        action = torch.from_numpy(ep["/action"][:])
+        action = torch.from_numpy(ep["/observations/eef_6d"][:])
 
         velocity = None
         # if "/observations/qvel" in ep:
@@ -213,6 +213,18 @@ def populate_dataset(
 
         imgs_per_cam, state, action, velocity, effort = load_raw_episode_data(ep_path)
         num_frames = state.shape[0]
+        
+        if 'cube' in ep_path.lower():
+            task = 'touch cube'
+        elif 'bowl' in ep_path.lower():
+            task = 'stack bowls'
+        elif 'cup' in ep_path.lower():
+            task = 'pick up cup'
+        elif 'place' in ep_path.lower():
+            task = 'pick and then place object'
+        else:
+            raise ValueError(f"Unknown task for episode path: {ep_path}")
+        
         print(f"Processing episode {ep_idx} with {num_frames} frames, task: {task}")
         for i in range(num_frames):
             frame = {
@@ -248,8 +260,8 @@ def port_aloha(
     mode: Literal["video", "image"] = "image",
     dataset_config: DatasetConfig = DEFAULT_DATASET_CONFIG,
 ):
-    # if (HF_LEROBOT_HOME / repo_id).exists():
-    #     shutil.rmtree(HF_LEROBOT_HOME / repo_id)
+    if (HF_LEROBOT_HOME / repo_id).exists():
+        shutil.rmtree(HF_LEROBOT_HOME / repo_id)
 
     if not raw_dir.exists():
         if raw_repo_id is None:
@@ -264,7 +276,7 @@ def port_aloha(
 
     dataset = create_empty_dataset(
         repo_id,
-        robot_type="agilex_cloth",
+        robot_type="agilex_empirical",
         mode=mode,
         has_effort=False,
         has_velocity=False,
@@ -284,3 +296,4 @@ def port_aloha(
 
 if __name__ == "__main__":
     tyro.cli(port_aloha)
+    #/data/empirical/robotwin_new

@@ -28,7 +28,7 @@ import os
 from pathlib import Path
 from collections import defaultdict
 
-SAVE_JSON = "/home/wzh/openpi/examples/aloha_robotwin/noopt_2.json"
+SAVE_JSON = "/home/wzh/openpi/examples/aloha_robotwin/noopt_3.json"
 
 # 确保 JSON 文件可用
 if not os.path.exists(SAVE_JSON) or os.path.getsize(SAVE_JSON) == 0:
@@ -246,18 +246,18 @@ def populate_dataset(
         GLOBAL_TRANS[instruction] = task_name  # 记录 instruction -> task_name 的映射
         kept_count = 0
         noopt_frames = []
-        for i in range(num_frames):
-            if i > 0:
-                diff = np.linalg.norm(action[i] - action[i-1])
-                if diff < threshold:
-                    continue  # 跳过静止帧
-            noopt_frames.append(i)
+        # for i in range(num_frames):
+        #     if i > 0:
+        #         diff = np.linalg.norm(action[i] - action[i-1])
+        #         if diff < threshold:
+        #             continue  # 跳过静止帧
+        #     noopt_frames.append(i)
 
-        for i in range(len(noopt_frames)):
-            if i == len(noopt_frames) - 1:
+        for i in range(num_frames):
+            if i == num_frames - 1:
                 continue  # 最后一帧不处理
-            next_action = action[noopt_frames[i + 1]]
-            current_action = action[noopt_frames[i]]
+            next_action = action[i + 1]
+            current_action = action[i]
             # next minus current
             delta_action = next_action - current_action
             # for gripper
@@ -288,18 +288,18 @@ def populate_dataset(
         print(msg)
 
         # 实时写 JSON
-        with open(SAVE_JSON, "r") as f:
-            log_data = json.load(f)
-        log_data.append({
-            "episode": int(ep_idx),
-            "task_name": task_name,
-            "instruction": instruction,
-            "original_frames": int(num_frames),
-            "kept_frames": int(kept_count),
-            "ratio_percent": round(ratio, 2)
-        })
-        with open(SAVE_JSON, "w") as f:
-            json.dump(log_data, f, indent=2)
+        # with open(SAVE_JSON, "r") as f:
+        #     log_data = json.load(f)
+        # log_data.append({
+        #     "episode": int(ep_idx),
+        #     "task_name": task_name,
+        #     "instruction": instruction,
+        #     "original_frames": int(num_frames),
+        #     "kept_frames": int(kept_count),
+        #     "ratio_percent": round(ratio, 2)
+        # })
+        # with open(SAVE_JSON, "w") as f:
+        #     json.dump(log_data, f, indent=2)
 
         # 更新全局统计
         stats[instruction]["original"] += num_frames

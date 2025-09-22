@@ -142,7 +142,10 @@ def create_torch_dataset(
         delta_timestamps={
             key: [t / dataset_meta.fps for t in range(action_horizon)] for key in data_config.action_sequence_keys
         },
+        use_action_as_state=data_config.use_action_as_state,
+        use_state_as_action=data_config.use_state_as_action,
     )
+    print(f"Created dataset with {len(dataset)} samples from repo {repo_id}, use_action_as_state: {data_config.use_action_as_state}, use_state_as_action: {data_config.use_state_as_action}, action sequence keys: {data_config.action_sequence_keys}")
 
     if data_config.prompt_from_task:
         dataset = TransformedDataset(dataset, [_transforms.PromptFromLeRobotTask(dataset_meta.tasks)])
