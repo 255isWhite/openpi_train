@@ -167,5 +167,4 @@ cython_debug/
 #.idea/
 
 checkpoints/
-*.json
 .vscode

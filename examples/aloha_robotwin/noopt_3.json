@@ -1,0 +1,446 @@
+[
+  {
+    "episode": 0,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 270,
+    "kept_frames": 269,
+    "ratio_percent": 99.63
+  },
+  {
+    "episode": 1,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 245,
+    "kept_frames": 244,
+    "ratio_percent": 99.59
+  },
+  {
+    "episode": 2,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 260,
+    "kept_frames": 259,
+    "ratio_percent": 99.62
+  },
+  {
+    "episode": 3,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 240,
+    "kept_frames": 239,
+    "ratio_percent": 99.58
+  },
+  {
+    "episode": 4,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 243,
+    "kept_frames": 242,
+    "ratio_percent": 99.59
+  },
+  {
+    "episode": 5,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 245,
+    "kept_frames": 244,
+    "ratio_percent": 99.59
+  },
+  {
+    "episode": 6,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 239,
+    "kept_frames": 238,
+    "ratio_percent": 99.58
+  },
+  {
+    "episode": 7,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 240,
+    "kept_frames": 239,
+    "ratio_percent": 99.58
+  },
+  {
+    "episode": 8,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 241,
+    "kept_frames": 240,
+    "ratio_percent": 99.59
+  },
+  {
+    "episode": 9,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 243,
+    "kept_frames": 242,
+    "ratio_percent": 99.59
+  },
+  {
+    "episode": 10,
+    "task_name": "place_object_basket",
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "original_frames": 245,
+    "kept_frames": 244,
+    "ratio_percent": 99.59
+  },
+  {
+    "instruction": "Use one arm to place the box of playingcards in the basket with handle.",
+    "task_name": "place_object_basket",
+    "total_original_frames": 24607,
+    "total_kept_frames": 24507,
+    "global_ratio_percent": 99.59
+  },
+  {
+    "instruction": "Use the smooth light gray bowl to place the container into the greenish-gray flat dinner plate",
+    "task_name": "place_container_plate",
+    "total_original_frames": 15727,
+    "total_kept_frames": 15627,
+    "global_ratio_percent": 99.36
+  },
+  {
+    "instruction": "Directly interact with the plastic switch with angled edges",
+    "task_name": "turn_switch",
+    "total_original_frames": 19648,
+    "total_kept_frames": 19448,
+    "global_ratio_percent": 98.98
+  },
+  {
+    "instruction": "Slide open the cabinet with angled sides's drawer and set the rubikscube colorful and compact inside.",
+    "task_name": "put_object_cabinet",
+    "total_original_frames": 54138,
+    "total_kept_frames": 53938,
+    "global_ratio_percent": 99.63
+  },
+  {
+    "instruction": "Grab the hand-sized toycar with white roof bars using the right arm and place it left of the rectangular phone.",
+    "task_name": "place_a2b_left",
+    "total_original_frames": 29643,
+    "total_kept_frames": 29443,
+    "global_ratio_percent": 99.33
+  },
+  {
+    "instruction": "Grab the the mouse with two buttons and wheel and position it onto the Gray mat.",
+    "task_name": "place_mouse_pad",
+    "total_original_frames": 15290,
+    "total_kept_frames": 15190,
+    "global_ratio_percent": 99.35
+  },
+  {
+    "instruction": "Take the ceramic bowl with earthy brown trim, place it, and stack the blue bowl on top.",
+    "task_name": "stack_bowls_two",
+    "total_original_frames": 63239,
+    "total_kept_frames": 63039,
+    "global_ratio_percent": 99.68
+  },
+  {
+    "instruction": "Grab the plastic seal with handle and press Beige",
+    "task_name": "stamp_seal",
+    "total_original_frames": 28334,
+    "total_kept_frames": 28134,
+    "global_ratio_percent": 99.29
+  },
+  {
+    "instruction": "Position red block, green block, and blue block in the center and stack blue block on green block, followed by green block on red block.",
+    "task_name": "stack_blocks_three",
+    "total_original_frames": 46978,
+    "total_kept_frames": 46878,
+    "global_ratio_percent": 99.79
+  },
+  {
+    "instruction": "Use the left arm to move the white bottle with orange label to the pad",
+    "task_name": "move_pillbottle_pad",
+    "total_original_frames": 29427,
+    "total_kept_frames": 29227,
+    "global_ratio_percent": 99.32
+  },
+  {
+    "instruction": "Set the stapler with silver staple tray on the Gray mat with the left arm.",
+    "task_name": "move_stapler_pad",
+    "total_original_frames": 30729,
+    "total_kept_frames": 30529,
+    "global_ratio_percent": 99.35
+  },
+  {
+    "instruction": "Catch the smooth brown bottle with green label, then grab the smooth plastic bottle too.",
+    "task_name": "pick_diverse_bottles",
+    "total_original_frames": 12744,
+    "total_kept_frames": 12640,
+    "global_ratio_percent": 99.18
+  },
+  {
+    "instruction": "Take the white microphone handle black accents and move it to the other hand.",
+    "task_name": "handover_mic",
+    "total_original_frames": 44445,
+    "total_kept_frames": 44245,
+    "global_ratio_percent": 99.55
+  },
+  {
+    "instruction": "Lift the rounded base blue cup up and drop it on the light gray round grainy coaster.",
+    "task_name": "place_empty_cup",
+    "total_original_frames": 17072,
+    "total_kept_frames": 16972,
+    "global_ratio_percent": 99.41
+  },
+  {
+    "instruction": "Pick up the rectangular plastic paymentsign and adjust its position to face the qrcode towards you.",
+    "task_name": "rotate_qrcode",
+    "total_original_frames": 19211,
+    "total_kept_frames": 19086,
+    "global_ratio_percent": 99.35
+  },
+  {
+    "instruction": "Lift the mouse with two buttons and a scroll wheel and position it on the electronicscale with round weight platform",
+    "task_name": "place_object_scale",
+    "total_original_frames": 14534,
+    "total_kept_frames": 14434,
+    "global_ratio_percent": 99.31
+  },
+  {
+    "instruction": "Lift the golden brown bread with braided design and the light brown bread with ridges with two arms, put in the basket for carrying bread beige.",
+    "task_name": "place_bread_basket",
+    "total_original_frames": 45207,
+    "total_kept_frames": 45007,
+    "global_ratio_percent": 99.56
+  },
+  {
+    "instruction": "Pick the bottle with brown body and white top up with the left arm and shake.",
+    "task_name": "shake_bottle",
+    "total_original_frames": 24862,
+    "total_kept_frames": 24762,
+    "global_ratio_percent": 99.6
+  },
+  {
+    "instruction": "Place the palm-fitting mouse on the angled displaystand.",
+    "task_name": "place_object_stand",
+    "total_original_frames": 13896,
+    "total_kept_frames": 13796,
+    "global_ratio_percent": 99.28
+  },
+  {
+    "instruction": "Pick the bottle with ridges near base head-up using the right arm",
+    "task_name": "adjust_bottle",
+    "total_original_frames": 28519,
+    "total_kept_frames": 28319,
+    "global_ratio_percent": 99.3
+  },
+  {
+    "instruction": "Use one arm the right arm to press the stapler with smooth blue finish.",
+    "task_name": "press_stapler",
+    "total_original_frames": 14173,
+    "total_kept_frames": 14073,
+    "global_ratio_percent": 99.29
+  },
+  {
+    "instruction": "Click the black matte alarm-clock's top center button using the right arm.",
+    "task_name": "click_alarmclock",
+    "total_original_frames": 16956,
+    "total_kept_frames": 16756,
+    "global_ratio_percent": 98.82
+  },
+  {
+    "instruction": "Bring large block, medium block, and small block to the center, sorting largest to smallest.",
+    "task_name": "blocks_ranking_size",
+    "total_original_frames": 91979,
+    "total_kept_frames": 91779,
+    "global_ratio_percent": 99.78
+  },
+  {
+    "instruction": "Lift the mug with rounded handle, give it a turn, and hang it onto the rack with two rods sticking out.",
+    "task_name": "hanging_mug",
+    "total_original_frames": 67421,
+    "total_kept_frames": 67221,
+    "global_ratio_percent": 99.7
+  },
+  {
+    "instruction": "Take the yellow liquid container with green top, the medium-sized water bottle, and the black bottle with red label one at a time and place them into the smooth black dustbin.",
+    "task_name": "put_bottles_dustbin",
+    "total_original_frames": 62280,
+    "total_kept_frames": 62180,
+    "global_ratio_percent": 99.84
+  },
+  {
+    "instruction": "Grab the first the bowl with shiny texture, position the second, then add the third.",
+    "task_name": "stack_bowls_three",
+    "total_original_frames": 47143,
+    "total_kept_frames": 47043,
+    "global_ratio_percent": 99.79
+  },
+  {
+    "instruction": "Grab the red block with the left arm, pass it to the right hand, and drop it on the blue pad.",
+    "task_name": "handover_block",
+    "total_original_frames": 57015,
+    "total_kept_frames": 56815,
+    "global_ratio_percent": 99.65
+  },
+  {
+    "instruction": "With both arms, move two the white shoe with rubber sole into the shoe-box with Nike printed logo, tips facing left.",
+    "task_name": "place_dual_shoes",
+    "total_original_frames": 23285,
+    "total_kept_frames": 23185,
+    "global_ratio_percent": 99.57
+  },
+  {
+    "instruction": "Take the metallic phone with glass screen front to the small plastic phonestand.",
+    "task_name": "place_phone_stand",
+    "total_original_frames": 12832,
+    "total_kept_frames": 12731,
+    "global_ratio_percent": 99.21
+  },
+  {
+    "instruction": "Activate the door to open the countertop microwave.",
+    "task_name": "open_microwave",
+    "total_original_frames": 72840,
+    "total_kept_frames": 72722,
+    "global_ratio_percent": 99.84
+  },
+  {
+    "instruction": "Center red block using the left arm, then stack green block with the left arm on top.",
+    "task_name": "stack_blocks_two",
+    "total_original_frames": 33139,
+    "total_kept_frames": 33033,
+    "global_ratio_percent": 99.68
+  },
+  {
+    "instruction": "Use the medium-sized metal hammer to hammer the block.",
+    "task_name": "beat_block_hammer",
+    "total_original_frames": 22981,
+    "total_kept_frames": 22781,
+    "global_ratio_percent": 99.13
+  },
+  {
+    "instruction": "With the right arm, pick the barcode scanner, then grab the cube tea box with embossed designs with the left arm, and scan the cube tea box with embossed designs.",
+    "task_name": "scan_object",
+    "total_original_frames": 16889,
+    "total_kept_frames": 16789,
+    "global_ratio_percent": 99.41
+  },
+  {
+    "instruction": "Move the soft brown bread from table into the skillet with black cooking surface",
+    "task_name": "place_bread_skillet",
+    "total_original_frames": 33212,
+    "total_kept_frames": 33012,
+    "global_ratio_percent": 99.4
+  },
+  {
+    "instruction": "Bring the stapler with smooth blue finish to the right position of the compact woodenblock for organizing.",
+    "task_name": "place_a2b_right",
+    "total_original_frames": 29817,
+    "total_kept_frames": 29617,
+    "global_ratio_percent": 99.33
+  },
+  {
+    "instruction": "Lift the light brown wooden roller off the table with both arms",
+    "task_name": "grab_roller",
+    "total_original_frames": 12732,
+    "total_kept_frames": 12599,
+    "global_ratio_percent": 98.96
+  },
+  {
+    "instruction": "Grab the brown bottle with red label with an arm, grab the bottle with ridges near base next.",
+    "task_name": "pick_dual_bottles",
+    "total_original_frames": 24576,
+    "total_kept_frames": 24376,
+    "global_ratio_percent": 99.19
+  },
+  {
+    "instruction": "Move the white shoe from the table to the mat",
+    "task_name": "place_shoe",
+    "total_original_frames": 17525,
+    "total_kept_frames": 17425,
+    "global_ratio_percent": 99.43
+  },
+  {
+    "instruction": "Pick the brown top sauce can and position it next to the kitchenpot with smooth metallic lid",
+    "task_name": "move_can_pot",
+    "total_original_frames": 30494,
+    "total_kept_frames": 30294,
+    "global_ratio_percent": 99.34
+  },
+  {
+    "instruction": "Take the hand-sized orange hamburg and the Red fries box to the plastic tray for holding items and set them there.",
+    "task_name": "place_burger_fries",
+    "total_original_frames": 48269,
+    "total_kept_frames": 48069,
+    "global_ratio_percent": 99.59
+  },
+  {
+    "instruction": "Use dual arms to pick the palm-sized drink can and the metal can with pull-tab top, placing both in the deep blue plasticbox with grooves.",
+    "task_name": "place_cans_plasticbox",
+    "total_original_frames": 28492,
+    "total_kept_frames": 28392,
+    "global_ratio_percent": 99.65
+  },
+  {
+    "instruction": "Pick up red block using the left arm, set it on the left, repeat the placement with the right arm for green block, and the left arm for blue block.",
+    "task_name": "blocks_ranking_rgb",
+    "total_original_frames": 92246,
+    "total_kept_frames": 92046,
+    "global_ratio_percent": 99.78
+  },
+  {
+    "instruction": "Take the desk-sized white tabletrashbin and empty its contents.",
+    "task_name": "dump_bin_bigbin",
+    "total_original_frames": 47888,
+    "total_kept_frames": 47688,
+    "global_ratio_percent": 99.58
+  },
+  {
+    "instruction": "Lift the smooth playingcards holder from the table and move it outward.",
+    "task_name": "move_playingcard_away",
+    "total_original_frames": 23353,
+    "total_kept_frames": 23153,
+    "global_ratio_percent": 99.14
+  },
+  {
+    "instruction": "Grab the fan with grid cover with the right arm, set it on the Silver mat, and align it to face the robot",
+    "task_name": "place_fan",
+    "total_original_frames": 14580,
+    "total_kept_frames": 14480,
+    "global_ratio_percent": 99.31
+  },
+  {
+    "instruction": "Hold the gray kitchenpot with both arms",
+    "task_name": "lift_pot",
+    "total_original_frames": 22451,
+    "total_kept_frames": 22251,
+    "global_ratio_percent": 99.11
+  },
+  {
+    "instruction": "Press down the bell shaped like half-circle dome's top center gently.",
+    "task_name": "click_bell",
+    "total_original_frames": 16957,
+    "total_kept_frames": 16757,
+    "global_ratio_percent": 98.82
+  },
+  {
+    "instruction": "Take the white can with 3D RADY label from its spot and drop it into the basket with black handle.",
+    "task_name": "place_can_basket",
+    "total_original_frames": 45942,
+    "total_kept_frames": 45760,
+    "global_ratio_percent": 99.6
+  },
+  {
+    "instruction": "Shake the rounded bottle with printed details horizontally after lifting with the left arm.",
+    "task_name": "shake_bottle_horizontally",
+    "total_original_frames": 27835,
+    "total_kept_frames": 27735,
+    "global_ratio_percent": 99.64
+  },
+  {
+    "instruction": "Lift and open the laptop with black textured screen.",
+    "task_name": "open_laptop",
+    "total_original_frames": 52827,
+    "total_kept_frames": 52627,
+    "global_ratio_percent": 99.62
+  },
+  {
+    "instruction": "OVERALL",
+    "total_original_frames": 1686379,
+    "total_kept_frames": 1678610,
+    "global_ratio_percent": 99.54
+  }
+]
