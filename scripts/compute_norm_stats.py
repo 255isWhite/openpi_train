@@ -104,7 +104,7 @@ def main(config_name: str, max_frames: int | None = None):
 
     for batch in tqdm.tqdm(data_loader, total=num_batches, desc="Computing stats"):
         for key in keys:
-            print(f"key: {key}, batch[key][0]: {batch[key][0]}, shape: {np.asarray(batch[key]).shape}")
+            # print(f"key: {key}, batch[key][0]: {batch[key][0]}, shape: {np.asarray(batch[key]).shape}")
             stats[key].update(np.asarray(batch[key]))
 
     norm_stats = {key: stats.get_statistics() for key, stats in stats.items()}

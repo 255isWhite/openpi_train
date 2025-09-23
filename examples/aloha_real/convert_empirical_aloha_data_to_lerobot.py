@@ -207,23 +207,37 @@ def populate_dataset(
 ) -> LeRobotDataset:
     if episodes is None:
         episodes = range(len(hdf5_files))
+        
+    task_to_collect = {
+        'touch cube': 250,
+        'pick up cup': 250,
+        'pick and then place object': 250,
+        'put cube in bowl': 0
+    }
 
     for ep_idx in tqdm.tqdm(episodes):
         ep_path = hdf5_files[ep_idx]
-
-        imgs_per_cam, state, action, velocity, effort = load_raw_episode_data(ep_path)
-        num_frames = state.shape[0]
         
         if 'cube' in ep_path.lower():
             task = 'touch cube'
         elif 'bowl' in ep_path.lower():
-            task = 'stack bowls'
+            task = 'put cube in bowl'
         elif 'cup' in ep_path.lower():
             task = 'pick up cup'
         elif 'place' in ep_path.lower():
             task = 'pick and then place object'
         else:
             raise ValueError(f"Unknown task for episode path: {ep_path}")
+        
+        if task_to_collect[task] > 0:
+            task_to_collect[task] -= 1
+        else:
+            print(f"Skipping episode {ep_idx} with task {task} as we have enough examples.")
+            continue
+
+        imgs_per_cam, state, action, velocity, effort = load_raw_episode_data(ep_path)
+        num_frames = state.shape[0]
+        
         
         print(f"Processing episode {ep_idx} with {num_frames} frames, task: {task}")
         for i in range(num_frames):
